@@ -44,25 +44,31 @@
 
     #sound-button {
       position: absolute;
-      top: 22px;
-      right: 18px;
+      top: 14px;
+      right: 14px;
       z-index: 30;
 
-      padding: 11px 16px;
+      width: 28px;
+      height: 28px;
 
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 999px;
+      padding: 0;
 
-      background: rgba(0, 0, 0, 0.45);
+      border: none;
+      border-radius: 50%;
+
+      background: rgba(0, 0, 0, 0.35);
       color: white;
 
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 13px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       cursor: pointer;
 
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     #skip-button {
@@ -122,6 +128,7 @@
       height: 100%;
 
       background: white;
+
       z-index: 20;
     }
 
@@ -147,8 +154,11 @@
       <source src="video.mp4" type="video/mp4">
     </video>
 
-    <button id="sound-button">
-      🔊 Activar sonido
+    <button
+      id="sound-button"
+      aria-label="Activar sonido"
+    >
+      🔊
     </button>
 
     <button id="play-button">
