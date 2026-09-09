@@ -1,1 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  >
+
+  <title>Koala Club | Koshé</title>
+
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      font-family: Arial, sans-serif;
+    }
+
+    #video-screen {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 10;
+    }
+
+    #koshe-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #skip-button {
+      position: absolute;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%);
+      z-index: 30;
+
+      padding: 12px 22px;
+
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 999px;
+
+      background: rgba(0, 0, 0, 0.45);
+      color: white;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    #play-button {
+      display: none;
+
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 30;
+
+      padding: 14px 24px;
+
+      border: none;
+      border-radius: 999px;
+
+      background: white;
+      color: black;
+
+      font-size: 16px;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+    #form-screen {
+      display: none;
+
+      position: fixed;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: white;
+
+      z-index: 20;
+    }
+
+    #form-screen iframe {
+      width: 100%;
+      height: 100%;
+
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="video-screen">
+
+    <video
+      id="koshe-video"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+    >
+      <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <button id="play-button">
+      Ver video
+    </button>
+
+    <button id="skip-button">
+      Saltar video
+    </button>
+
+  </div>
+
+
+  <div id="form-screen">
+
+    <iframe
+      data-tally-src="https://tally.so/r/J9E8yo?transparentBackground=1"
+      title="JOIN THE KOALA CLUB"
+    ></iframe>
+
+  </div>
+
+
+  <script>
+    const video = document.getElementById("koshe-video");
+    const videoScreen = document.getElementById("video-screen");
+    const formScreen = document.getElementById("form-screen");
+
+    const skipButton = document.getElementById("skip-button");
+    const playButton = document.getElementById("play-button");
+
+
+    function showForm() {
+      video.pause();
+
+      videoScreen.style.display = "none";
+      formScreen.style.display = "block";
+
+      if (typeof Tally !== "undefined") {
+        Tally.loadEmbeds();
+      }
+    }
+
+
+    video.addEventListener("ended", showForm);
+
+
+    skipButton.addEventListener("click", showForm);
+
+
+    window.addEventListener("load", async () => {
+      try {
+        await video.play();
+      } catch (error) {
+        playButton.style.display = "block";
+      }
+    });
+
+
+    playButton.addEventListener("click", async () => {
+      try {
+        video.muted = false;
+
+        await video.play();
+
+        playButton.style.display = "none";
+      } catch (error) {
+        console.log("No se pudo reproducir el video.");
+      }
+    });
+
+  </script>
+
+</body>
+</html>
